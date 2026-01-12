@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    --navbar-height: 60px;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -62,7 +66,7 @@ body {
     color: #fff;
     padding: 120px 20px 80px;
     text-align: center;
-    margin-top: 60px;
+    margin-top: var(--navbar-height);
 }
 
 .hero h2 {
