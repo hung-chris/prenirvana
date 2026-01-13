@@ -28,6 +28,8 @@
     </head>
 	
     <body id="welcome">
+        <button id="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+        <div class="nav-overlay" id="nav-overlay"></div>
     
         <aside class="left-sidebar">
             <div class="logo">
@@ -998,6 +1000,30 @@
                         a.appendChild(img);
                     });
                 } catch(e) { /* noop */ }
+            })();
+        </script>
+        <script>
+            (function(){
+                var btn = document.getElementById('nav-toggle');
+                var sidebar = document.querySelector('.left-sidebar');
+                var overlay = document.getElementById('nav-overlay');
+                function openNav(){ sidebar.classList.add('open'); overlay.classList.add('show'); }
+                function closeNav(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+                function updateToggleVisibility(){
+                    if(!btn) return;
+                    if(window.innerWidth <= 900) btn.style.display = 'block';
+                    else btn.style.display = 'none';
+                }
+                if(btn && sidebar && overlay){
+                    updateToggleVisibility();
+                    btn.addEventListener('click', function(){ if(sidebar.classList.contains('open')) closeNav(); else openNav(); });
+                    overlay.addEventListener('click', closeNav);
+                    // close nav on window resize to desktop and update toggle visibility
+                    window.addEventListener('resize', function(){ updateToggleVisibility(); if(window.innerWidth > 900) { closeNav(); }});
+                } else if(btn) {
+                    updateToggleVisibility();
+                    window.addEventListener('resize', updateToggleVisibility);
+                }
             })();
         </script>
 		
